@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alex Torgboshie —DevOps Engineer &  Data Engineer & Analyst</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink:       #0D1117;
+    --ink-soft:  #3D4554;
+    --ink-muted: #6B7280;
+    --page:      #F7F8FA;
+    --card:      #FFFFFF;
+    --blue:      #0057B8;
+    --blue-mid:  #0070C0;
+    --blue-light:#E8F2FF;
+    --gold:      #D4A017;
+    --gold-light:#FFF8E7;
+    --border:    #E2E6EE;
+    --radius:    12px;
+    --mono:      'DM Mono', monospace;
+    --sans:      'Space Grotesk', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--sans);
+    background: var(--page);
+    color: var(--ink);
+    line-height: 1.6;
+    font-size: 16px;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(247,248,250,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 5%;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 60px;
+  }
+  .nav-logo {
+    font-size: 1rem; font-weight: 700; color: var(--blue);
+    letter-spacing: -0.5px; text-decoration: none;
+  }
+  .nav-logo span { color: var(--ink); }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    text-decoration: none; color: var(--ink-soft);
+    font-size: 0.875rem; font-weight: 500;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--blue); }
+  .nav-cta {
+    background: var(--blue); color: #fff;
+    padding: 0.4rem 1.1rem; border-radius: 6px;
+    font-size: 0.875rem; font-weight: 600;
+    text-decoration: none; transition: background 0.2s;
+  }
+  .nav-cta:hover { background: #0046a0; }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: calc(100vh - 60px);
+    display: grid; grid-template-columns: 1fr 1fr;
+    align-items: center; gap: 4rem;
+    padding: 5rem 5%;
+    max-width: 1200px; margin: 0 auto;
+  }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    background: var(--blue-light); color: var(--blue);
+    padding: 0.3rem 0.9rem; border-radius: 100px;
+    font-size: 0.8rem; font-weight: 600; letter-spacing: 0.5px;
+    text-transform: uppercase; margin-bottom: 1.5rem;
+  }
+  .hero-badge::before {
+    content: ''; width: 6px; height: 6px; border-radius: 50%;
+    background: var(--blue); animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0%,100% { opacity: 1; } 50% { opacity: 0.3; }
+  }
+  .hero h1 {
+    font-size: clamp(2.2rem, 4vw, 3.4rem);
+    font-weight: 700; line-height: 1.1;
+    letter-spacing: -1.5px; margin-bottom: 1.2rem;
+  }
+  .hero h1 .name-highlight {
+    color: var(--blue);
+    position: relative; display: inline-block;
+  }
+  .hero h1 .name-highlight::after {
+    content: '';
+    position: absolute; bottom: 2px; left: 0; right: 0;
+    height: 4px; background: var(--gold); border-radius: 2px;
+  }
+  .hero-sub {
+    font-size: 1.1rem; color: var(--ink-soft);
+    max-width: 500px; margin-bottom: 2rem; line-height: 1.7;
+  }
+  .hero-location {
+    display: flex; align-items: center; gap: 0.4rem;
+    color: var(--ink-muted); font-size: 0.875rem;
+    margin-bottom: 2rem;
+  }
+  .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--blue); color: #fff;
+    padding: 0.75rem 1.6rem; border-radius: 8px;
+    font-weight: 600; font-size: 0.95rem;
+    text-decoration: none; transition: all 0.2s;
+    display: inline-flex; align-items: center; gap: 0.4rem;
+  }
+  .btn-primary:hover { background: #0046a0; transform: translateY(-1px); }
+  .btn-secondary {
+    background: var(--card); color: var(--ink);
+    padding: 0.75rem 1.6rem; border-radius: 8px;
+    font-weight: 600; font-size: 0.95rem;
+    text-decoration: none; border: 1.5px solid var(--border);
+    transition: all 0.2s;
+    display: inline-flex; align-items: center; gap: 0.4rem;
+  }
+  .btn-secondary:hover { border-color: var(--blue); color: var(--blue); transform: translateY(-1px); }
+
+  /* Hero right — stat cards */
+  .hero-right {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+  .stat-card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 1.4rem;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .stat-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,87,184,0.1); }
+  .stat-card.featured {
+    grid-column: 1 / -1;
+    background: linear-gradient(135deg, var(--blue) 0%, #0046a0 100%);
+    color: white;
+  }
+  .stat-num {
+    font-size: 2rem; font-weight: 700; letter-spacing: -1px;
+    color: var(--blue); display: block; margin-bottom: 0.2rem;
+  }
+  .stat-card.featured .stat-num { color: #AACCFF; }
+  .stat-label {
+    font-size: 0.82rem; color: var(--ink-muted); font-weight: 500;
+  }
+  .stat-card.featured .stat-label { color: rgba(255,255,255,0.75); }
+  .stat-card.featured .stat-main {
+    font-size: 1.15rem; font-weight: 600; color: white; margin-bottom: 0.3rem;
+  }
+
+  /* ── SECTION WRAPPER ── */
+  .section {
+    max-width: 1200px; margin: 0 auto;
+    padding: 5rem 5%;
+  }
+  .section-eyebrow {
+    font-family: var(--mono);
+    font-size: 0.75rem; color: var(--blue);
+    letter-spacing: 2px; text-transform: uppercase;
+    margin-bottom: 0.75rem;
+  }
+  .section-title {
+    font-size: clamp(1.8rem, 3vw, 2.4rem);
+    font-weight: 700; letter-spacing: -1px;
+    margin-bottom: 0.75rem;
+  }
+  .section-sub {
+    color: var(--ink-soft); font-size: 1rem;
+    max-width: 600px; margin-bottom: 3rem; line-height: 1.7;
+  }
+  .divider {
+    border: none; border-top: 1px solid var(--border);
+    margin: 0;
+  }
+
+  /* ── SKILLS ── */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1.25rem;
+  }
+  .skill-group {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 1.4rem;
+  }
+  .skill-group-title {
+    font-size: 0.78rem; font-weight: 600; letter-spacing: 1px;
+    text-transform: uppercase; color: var(--blue);
+    margin-bottom: 1rem; font-family: var(--mono);
+  }
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .skill-tag {
+    background: var(--blue-light); color: var(--blue);
+    padding: 0.3rem 0.75rem; border-radius: 100px;
+    font-size: 0.8rem; font-weight: 500;
+  }
+  .skill-tag.gold { background: var(--gold-light); color: #92600A; }
+
+  /* ── PROJECTS ── */
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 1.5rem;
+  }
+  .project-card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: var(--radius); overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+    display: flex; flex-direction: column;
+  }
+  .project-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(0,87,184,0.12);
+  }
+  .project-header {
+    padding: 1.6rem 1.6rem 0;
+    display: flex; justify-content: space-between; align-items: flex-start;
+  }
+  .project-icon {
+    width: 48px; height: 48px; border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.4rem;
+  }
+  .project-icon.blue { background: var(--blue-light); }
+  .project-icon.gold { background: var(--gold-light); }
+  .project-icon.green { background: #E8F5E9; }
+  .project-links { display: flex; gap: 0.5rem; }
+  .project-link {
+    display: flex; align-items: center; gap: 0.3rem;
+    text-decoration: none; font-size: 0.78rem; font-weight: 600;
+    padding: 0.3rem 0.7rem; border-radius: 6px;
+    border: 1px solid var(--border); color: var(--ink-soft);
+    transition: all 0.2s;
+  }
+  .project-link:hover { border-color: var(--blue); color: var(--blue); }
+  .project-body { padding: 1.2rem 1.6rem 1.6rem; flex: 1; display: flex; flex-direction: column; }
+  .project-title {
+    font-size: 1.05rem; font-weight: 700; margin-bottom: 0.5rem;
+    color: var(--ink);
+  }
+  .project-desc {
+    font-size: 0.875rem; color: var(--ink-soft);
+    line-height: 1.65; margin-bottom: 1.2rem; flex: 1;
+  }
+  .project-tech { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .tech-tag {
+    font-family: var(--mono); font-size: 0.72rem;
+    background: var(--page); color: var(--ink-muted);
+    padding: 0.2rem 0.6rem; border-radius: 4px;
+    border: 1px solid var(--border);
+  }
+
+  /* ── EXPERIENCE TIMELINE ── */
+  .timeline { position: relative; padding-left: 2rem; }
+  .timeline::before {
+    content: ''; position: absolute; left: 6px; top: 8px; bottom: 8px;
+    width: 2px; background: var(--border);
+  }
+  .timeline-item { position: relative; margin-bottom: 2.5rem; }
+  .timeline-dot {
+    position: absolute; left: -2rem; top: 6px;
+    width: 14px; height: 14px; border-radius: 50%;
+    background: var(--blue); border: 3px solid var(--page);
+    box-shadow: 0 0 0 2px var(--blue);
+  }
+  .timeline-meta {
+    font-family: var(--mono); font-size: 0.75rem;
+    color: var(--ink-muted); margin-bottom: 0.3rem;
+    letter-spacing: 0.5px;
+  }
+  .timeline-title {
+    font-size: 1.05rem; font-weight: 700; margin-bottom: 0.2rem;
+  }
+  .timeline-company {
+    font-size: 0.875rem; color: var(--blue); font-weight: 500;
+    margin-bottom: 0.6rem;
+  }
+  .timeline-points { list-style: none; }
+  .timeline-points li {
+    font-size: 0.875rem; color: var(--ink-soft);
+    padding: 0.25rem 0; padding-left: 1rem; position: relative;
+    line-height: 1.6;
+  }
+  .timeline-points li::before {
+    content: '→'; position: absolute; left: 0;
+    color: var(--blue); font-size: 0.75rem;
+  }
+
+  /* ── CERTS ── */
+  .certs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1rem;
+  }
+  .cert-card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 1.25rem 1.4rem;
+    display: flex; gap: 1rem; align-items: flex-start;
+    transition: transform 0.2s;
+  }
+  .cert-card:hover { transform: translateY(-2px); }
+  .cert-icon {
+    width: 44px; height: 44px; border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.3rem; flex-shrink: 0;
+  }
+  .cert-icon.cisco { background: #E8F0FF; }
+  .cert-icon.ms { background: var(--blue-light); }
+  .cert-icon.aws { background: #FFF3E0; }
+  .cert-name { font-size: 0.9rem; font-weight: 600; margin-bottom: 0.2rem; }
+  .cert-issuer { font-size: 0.78rem; color: var(--ink-muted); }
+  .cert-status {
+    font-size: 0.7rem; font-weight: 600; letter-spacing: 0.5px;
+    padding: 0.15rem 0.55rem; border-radius: 100px;
+    display: inline-block; margin-top: 0.4rem;
+  }
+  .cert-status.earned { background: #E8F5E9; color: #2E7D32; }
+  .cert-status.progress { background: var(--gold-light); color: #92600A; }
+
+  /* ── CONTACT ── */
+  .contact-section {
+    background: linear-gradient(135deg, var(--blue) 0%, #0D3A7A 100%);
+    padding: 5rem 5%; text-align: center; color: white;
+  }
+  .contact-section .section-eyebrow { color: #AACCFF; }
+  .contact-section .section-title { color: white; margin-bottom: 0.75rem; }
+  .contact-section p { color: rgba(255,255,255,0.75); max-width: 500px; margin: 0 auto 2.5rem; }
+  .contact-links {
+    display: flex; gap: 1rem; flex-wrap: wrap;
+    justify-content: center;
+  }
+  .contact-link {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    background: rgba(255,255,255,0.12); color: white;
+    padding: 0.75rem 1.4rem; border-radius: 8px;
+    text-decoration: none; font-weight: 600; font-size: 0.9rem;
+    border: 1px solid rgba(255,255,255,0.2);
+    transition: all 0.2s;
+  }
+  .contact-link:hover { background: rgba(255,255,255,0.22); transform: translateY(-2px); }
+  .contact-link.highlight {
+    background: white; color: var(--blue);
+  }
+  .contact-link.highlight:hover { background: #f0f5ff; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--ink); color: rgba(255,255,255,0.5);
+    text-align: center; padding: 1.5rem;
+    font-size: 0.8rem;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    .hero { grid-template-columns: 1fr; gap: 2rem; padding: 3rem 5%; }
+    .hero-right { grid-template-columns: 1fr 1fr; }
+    .nav-links { display: none; }
+    .projects-grid { grid-template-columns: 1fr; }
+    .skills-grid { grid-template-columns: 1fr; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">Alex<span>Torgboshie</span></a>
+  <ul class="nav-links">
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#certifications">Certifications</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="mailto:alex.gbagolxe@gmail.com" class="nav-cta">Hire Me</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-badge">Available for Remote Roles</div>
+    <h1>
+      Data Engineer & DevOps Engineer<br>
+      &amp; Analyst.<br>
+      <span class="name-highlight">Alex Torgboshie.</span>
+    </h1>
+    <p class="hero-sub">
+      I build data pipelines, SQL warehouses, and Power BI dashboards that turn raw business data into decisions. Based in Accra, open to remote worldwide.
+    </p>
+    <div class="hero-location">
+      📍 Accra, Ghana &nbsp;·&nbsp; 🌍 Remote Worldwide
+    </div>
+    <div class="hero-actions">
+      <a href="https://github.com/Alex-Agbey" target="_blank" class="btn-primary">
+        View GitHub Projects
+      </a>
+      <a href="#contact" class="btn-secondary">
+        Get In Touch
+      </a>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="stat-card featured">
+      <div class="stat-main">DevOps Engineer → Data Engineer</div>
+      <div class="stat-label">3+ years infrastructure experience powering a data analytics transition</div>
+    </div>
+    <div class="stat-card">
+      <span class="stat-num">3+</span>
+      <div class="stat-label">Years DevOps & Cloud Engineering</div>
+    </div>
+    <div class="stat-card">
+      <span class="stat-num">2</span>
+      <div class="stat-label">Portfolio Data Pipeline Projects</div>
+    </div>
+    <div class="stat-card">
+      <span class="stat-num">SQL</span>
+      <div class="stat-label">Python · Power BI · AWS · dbt</div>
+    </div>
+    <div class="stat-card">
+      <span class="stat-num">B.Ed</span>
+      <div class="stat-label">Management Studies — Business Context</div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- SKILLS -->
+<section class="section" id="skills">
+  <p class="section-eyebrow">What I Work With</p>
+  <h2 class="section-title">Skills & Tools</h2>
+  <p class="section-sub">A full-stack data engineering toolkit — from raw data extraction to published dashboards and cloud infrastructure.</p>
+
+  <div class="skills-grid">
+    <div class="skill-group">
+      <div class="skill-group-title">Data Engineering</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Python</span>
+        <span class="skill-tag">Pandas</span>
+        <span class="skill-tag">ETL Pipelines</span>
+        <span class="skill-tag">Apache Airflow</span>
+        <span class="skill-tag">dbt</span>
+        <span class="skill-tag">Apache Parquet</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-title">Databases & SQL</div>
+      <div class="skill-tags">
+        <span class="skill-tag">SQL</span>
+        <span class="skill-tag">SQLite</span>
+        <span class="skill-tag">PostgreSQL</span>
+        <span class="skill-tag">MySQL</span>
+        <span class="skill-tag">MongoDB</span>
+        <span class="skill-tag">AWS DynamoDB</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-title">Analytics & BI</div>
+      <div class="skill-tags">
+        <span class="skill-tag gold">Power BI</span>
+        <span class="skill-tag gold">DAX</span>
+        <span class="skill-tag gold">Power Query</span>
+        <span class="skill-tag">Excel (Advanced)</span>
+        <span class="skill-tag">Matplotlib</span>
+        <span class="skill-tag">Seaborn</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-title">Cloud & Infrastructure</div>
+      <div class="skill-tags">
+        <span class="skill-tag">AWS S3</span>
+        <span class="skill-tag">AWS RDS</span>
+        <span class="skill-tag">AWS Glue</span>
+        <span class="skill-tag">AWS ECS / EKS</span>
+        <span class="skill-tag">Terraform</span>
+        <span class="skill-tag">Docker</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-title">DevOps & CI/CD</div>
+      <div class="skill-tags">
+        <span class="skill-tag">GitHub Actions</span>
+        <span class="skill-tag">Kubernetes</span>
+        <span class="skill-tag">Helm</span>
+        <span class="skill-tag">Prometheus</span>
+        <span class="skill-tag">Grafana</span>
+        <span class="skill-tag">Linux / Bash</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-title">AI & Modern Stack</div>
+      <div class="skill-tags">
+        <span class="skill-tag gold">MCP Servers</span>
+        <span class="skill-tag gold">AI Analytics</span>
+        <span class="skill-tag">REST APIs</span>
+        <span class="skill-tag">Claude API</span>
+        <span class="skill-tag">Power BI AI Visuals</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- PROJECTS -->
+<section class="section" id="projects">
+  <p class="section-eyebrow">Portfolio</p>
+  <h2 class="section-title">Projects</h2>
+  <p class="section-sub">Production-style data engineering projects built end-to-end — from raw data to published dashboards and automated pipelines.</p>
+
+  <div class="projects-grid">
+
+    <div class="project-card">
+      <div class="project-header">
+        <div class="project-icon blue">🛒</div>
+        <div class="project-links">
+          <a href="https://github.com/Alex-Agbey/ghana-ecommerce-analytics" target="_blank" class="project-link">GitHub →</a>
+        </div>
+      </div>
+      <div class="project-body">
+        <div class="project-title">Ghana E-Commerce Sales Analytics Pipeline</div>
+        <div class="project-desc">
+          Production-style ETL pipeline processing 6,000 sales transactions for a Ghana-based retailer. Automated data cleaning, star schema SQLite warehouse, 4 analytical charts, and Excel report generation — all from one command.
+        </div>
+        <div class="project-tech">
+          <span class="tech-tag">Python</span>
+          <span class="tech-tag">Pandas</span>
+          <span class="tech-tag">SQLite</span>
+          <span class="tech-tag">Star Schema</span>
+          <span class="tech-tag">Matplotlib</span>
+          <span class="tech-tag">OpenPyXL</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-header">
+        <div class="project-icon green">🌍</div>
+        <div class="project-links">
+          <a href="https://github.com/Alex-Agbey/covid19-africa-pipeline" target="_blank" class="project-link">GitHub →</a>
+        </div>
+      </div>
+      <div class="project-body">
+        <div class="project-title">COVID-19 Africa Public Data Pipeline</div>
+        <div class="project-desc">
+          Live ETL pipeline fetching real COVID-19 data for all 54 African countries from a public REST API. Enriches with sub-region classification, fatality rates, 7-day rolling averages, and generates automated analytical charts.
+        </div>
+        <div class="project-tech">
+          <span class="tech-tag">Python</span>
+          <span class="tech-tag">REST API</span>
+          <span class="tech-tag">Pandas</span>
+          <span class="tech-tag">SQLite</span>
+          <span class="tech-tag">Matplotlib</span>
+          <span class="tech-tag">Logging</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-header">
+        <div class="project-icon gold">📊</div>
+        <div class="project-links">
+          <a href="#" class="project-link">Live Demo →</a>
+        </div>
+      </div>
+      <div class="project-body">
+        <div class="project-title">GhanaShop Power BI Analytics Dashboard</div>
+        <div class="project-desc">
+          Three-page interactive Power BI report built on a star schema SQLite model. Features 16 DAX measures including time intelligence, AI visuals (Key Influencers, Q&A, Smart Narratives), drill-through pages, and conditional formatting.
+        </div>
+        <div class="project-tech">
+          <span class="tech-tag">Power BI</span>
+          <span class="tech-tag">DAX</span>
+          <span class="tech-tag">Star Schema</span>
+          <span class="tech-tag">Power Query</span>
+          <span class="tech-tag">AI Visuals</span>
+          <span class="tech-tag">SQLite</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-header">
+        <div class="project-icon blue">⚙️</div>
+        <div class="project-links">
+          <a href="https://github.com/Alex-Agbey" target="_blank" class="project-link">GitHub →</a>
+        </div>
+      </div>
+      <div class="project-body">
+        <div class="project-title">K8s-MCP-Toolkit — Kubernetes MCP Server</div>
+        <div class="project-desc">
+          Production-grade Kubernetes and AWS MCP server enabling AI agents to manage cloud infrastructure through natural language. Built on the Model Context Protocol standard for AI tool integration.
+        </div>
+        <div class="project-tech">
+          <span class="tech-tag">Kubernetes</span>
+          <span class="tech-tag">AWS</span>
+          <span class="tech-tag">MCP</span>
+          <span class="tech-tag">Python</span>
+          <span class="tech-tag">DevOps</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- EXPERIENCE -->
+<section class="section" id="experience">
+  <p class="section-eyebrow">Background</p>
+  <h2 class="section-title">Experience</h2>
+  <p class="section-sub">Four years building and managing cloud infrastructure, transitioning into data engineering and analytics.</p>
+
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-meta">2021 — Present</div>
+      <div class="timeline-title">DevOps Engineer</div>
+      <div class="timeline-company">Jomacs IT Solutions — Accra, Ghana</div>
+      <ul class="timeline-points">
+        <li>Designed and maintained AWS infrastructure: ECS, EKS, EC2, S3, RDS, CloudFront, VPC, IAM</li>
+        <li>Built CI/CD pipelines with GitHub Actions, Terraform, Helm, and Kustomize</li>
+        <li>Implemented container security with Trivy, Cosign, OPA/Conftest, Gitleaks, and Falco</li>
+        <li>Deployed production Kubernetes clusters using kubeadm, Minikube, and kind</li>
+        <li>Built MCP servers enabling AI agent interaction with Kubernetes and AWS infrastructure</li>
+        <li>Expanded into data engineering: Python ETL pipelines, SQLite data warehousing, Power BI dashboards</li>
+      </ul>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-meta">Ongoing</div>
+      <div class="timeline-title">Circuit Coordinator</div>
+      <div class="timeline-company">National Teachers Association — Upper West Region, Ghana</div>
+      <ul class="timeline-points">
+        <li>Coordinate teacher professional development programs across the circuit</li>
+        <li>Manage administrative data and reporting for regional education programs</li>
+        <li>Apply management and communication skills from B.Ed Management Studies</li>
+      </ul>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-meta">Education</div>
+      <div class="timeline-title">Bachelor of Education — Management Studies</div>
+      <div class="timeline-company">University of Cape Coast, Ghana</div>
+      <ul class="timeline-points">
+        <li>Business strategy, organisational management, and stakeholder communication</li>
+        <li>Foundation for translating data insights into business decisions</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- CERTIFICATIONS -->
+<section class="section" id="certifications">
+  <p class="section-eyebrow">Credentials</p>
+  <h2 class="section-title">Certifications</h2>
+  <p class="section-sub">Formal credentials validating both foundational knowledge and advanced technical skills.</p>
+
+  <div class="certs-grid">
+    <div class="cert-card">
+      <div class="cert-icon cisco">🔵</div>
+      <div>
+        <div class="cert-name">Data Analytics Essentials</div>
+        <div class="cert-issuer">Cisco Networking Academy</div>
+        <span class="cert-status earned">Earned</span>
+      </div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-icon ms">🟦</div>
+      <div>
+        <div class="cert-name">PL-300: Power BI Data Analyst Associate</div>
+        <div class="cert-issuer">Microsoft</div>
+        <span class="cert-status progress">In Progress</span>
+      </div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-icon aws">🟧</div>
+      <div>
+        <div class="cert-name">AWS Solutions Architect Associate</div>
+        <div class="cert-issuer">Amazon Web Services</div>
+        <span class="cert-status progress">In Progress</span>
+      </div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-icon aws">🟧</div>
+      <div>
+        <div class="cert-name">AWS Data Engineer Associate (DEA-C01)</div>
+        <div class="cert-issuer">Amazon Web Services</div>
+        <span class="cert-status progress">Planned</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact-section" id="contact">
+  <p class="section-eyebrow">Let's Work Together</p>
+  <h2 class="section-title">Get In Touch</h2>
+  <p>Open to remote Data Analyst,DevOps Engineer, Data Engineer, Analytics Engineer, and Business Analytics roles globally. Available for full-time, contract, and freelance work.</p>
+  <div class="contact-links">
+    <a href="mailto:gbagolex@gmail.com" class="contact-link highlight">
+      ✉️ Email Me
+    </a>
+    <a href="https://linkedin.com/in/alex-torgboshie-20893425a" target="_blank" class="contact-link">
+      LinkedIn
+    </a>
+    <a href="https://github.com/Alex-Agbey" target="_blank" class="contact-link">
+      GitHub
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>Built by Alex Torgboshie · Accra, Ghana · Open to Remote Worldwide</p>
+</footer>
+
+</body>
+</html>
